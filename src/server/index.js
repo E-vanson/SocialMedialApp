@@ -10,7 +10,6 @@ import path from "path"
 //helps set up the paths when we configure directories
 import { fileURLToPath } from "url"
 import helmet from "helmet"
-import { log } from "console"
 import { register } from "./controllers/auth.js"
 
 /*CONFIGURATIONS FOR MIDDLEWARE AND OTHER PACKAGES */
@@ -48,10 +47,10 @@ const PORT = process.env.PORT || 6001;
 /* ROUTE WITH FILES */
 //middleware
 app.post("/auth/register", upload.single("picture"), register)
-
+console.log("conn " + process.env.MONGO_URL);
 mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: false,
-    useUnifiedTopology : false,
+    useNewUrlParser: true,
+    useUnifiedTopology : true,
 }).then(()=>{
     app.listen(PORT, ()=>{console.log(`server listening on ${PORT}`)})
 }).catch((error)=>{
