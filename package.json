@@ -16,11 +16,11 @@
   },
   "name": "socialmedia",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "/home/e-vans/projects/socialmedia/src/server/index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon /home/e-vans/projects/socialmedia/src/server/index.js"
   },
   "repository": {
     "type": "git",

@@ -11,6 +11,7 @@ import path from "path"
 import { fileURLToPath } from "url"
 import helmet from "helmet"
 import { log } from "console"
+import { register } from "./controllers/auth.js"
 
 /*CONFIGURATIONS FOR MIDDLEWARE AND OTHER PACKAGES */
 //grabs file url
@@ -43,6 +44,10 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 const PORT = process.env.PORT || 6001;
+
+/* ROUTE WITH FILES */
+//middleware
+app.post("/auth/register", upload.single("picture"), register)
 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: false,
