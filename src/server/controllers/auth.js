@@ -36,8 +36,27 @@ export const register = async (req,res)=>{
         const savedUser = await newUser.save();
         res.status(201).send(savedUser);
     } catch (err) {
-
-        
         res.status(501).json({error: err.message});
+    }
+}
+
+export const login = async (req, res) =>{
+    try {
+        //destructure req.body
+    const {email, password} = req.body;
+    //check if user exists
+    const user = await User.findOne({email: email});
+    if(!user) return res.status(400).json({msg:"User doesn't exist"});
+
+    //check if password matches
+    const isMatch = await bcrypt.compare(password, user.password);
+    if(!isMatch) return res.status(400).json({msg:"Invalid credentials"});
+
+    //genrate jwt
+    const token = jsonwebtoken.sign({id: user._id}, process.env.JWT_SECRET);
+    delete user.password;
+    res.status(200).json({token, user});
+    } catch (err) {
+        res.status(500).json({msg: err.message});
     }
 }
