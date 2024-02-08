@@ -11,6 +11,7 @@ import path from "path"
 import { fileURLToPath } from "url"
 import helmet from "helmet"
 import authRoutes from "./routes/auth.js"
+import userRoutes from "./routes/user.js";
 import { register } from "./controllers/auth.js"
 
 
@@ -56,6 +57,14 @@ app.post("/auth/register", upload.single("picture"), register)
 
 /* ROUTE FOR LOGIN */
 app.use("/auth", authRoutes);
+
+/* USERS ROUTES:
+            1.Users profile
+            2.Users followers
+
+            */
+app.use("/users", userRoutes) 
+          ;
 console.log("conn " + process.env.MONGO_URL);
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
