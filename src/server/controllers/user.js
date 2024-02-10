@@ -28,7 +28,9 @@ export const getUserFriends = async (req, res)=>{
            )
            res.status(200).json(formattedFriends);
     }catch(err){
-        res.status(500).json({msg: err.message});
+        res.status(500).json({msg: err.message}
+            res.status(500).json({msg: err.message}
+                );
     }
    
 }
