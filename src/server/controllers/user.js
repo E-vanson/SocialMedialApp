@@ -24,11 +24,13 @@ export const getUserFriends = async (req, res)=>{
         const formattedFriends = await friends.map(
            ( {   _id,firstName,lastName,occupation,location,picturePath })=>{
             return {_id,firstName,lastName,occupation,location,picturePath};
+            console.log("log")
            }
            )
            res.status(200).json(formattedFriends);
     }catch(err){
         res.status(500).json({msg: err.message}
+        
                 );
     }
    
