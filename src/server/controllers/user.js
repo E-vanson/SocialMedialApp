@@ -18,7 +18,6 @@ export const getUserFriends = async (req, res)=>{
         const {id} = req.params;
         console.log("id: " + id);
         const validObjectId = mongoose.Types.ObjectId.isValid(id);
-        const validObjectId = mongoose.Types.ObjectId.isValid(id);
         console.log("Endpoint is working")
 if (!validObjectId) {
     console.log('Invalid ObjectId');
