@@ -21,6 +21,7 @@ export const getUserFriends = async (req, res)=>{
         console.log("Endpoint is working")
 if (!validObjectId) {
     console.log('Invalid ObjectId');
+     console.log('Invalid ObjectId');
 } else {
     // Use the valid ObjectId
     console.log("valid");
