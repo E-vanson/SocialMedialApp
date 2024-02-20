@@ -21,13 +21,12 @@ export const getUserFriends = async (req, res)=>{
         console.log("Endpoint is working")
 if (!validObjectId) {
     console.log('Invalid ObjectId');
-     console.log('Invalid ObjectId');
 } else {
     // Use the valid ObjectId
     console.log("valid");
 }
-
         const user = await User.findById(id);
+        console.log(user.friends);
 
         if (!user) {
             return res.status(404).json({ msg: "User not found" });
@@ -36,13 +35,15 @@ if (!validObjectId) {
         const friends = await Promise.all(
             user.friends.map((id)=> User.findById(id))
         )
-        
         const formattedFriends = friends.map(
            ({_id,firstName,lastName,picturePath,occupation})=>{
             return {_id,firstName,lastName,picturePath,occupation};
            }
            )
-           res.status(200).json(formattedFriends);
+           console.log(formattedFriends + " friends");
+          
+           //res.status(200).json(formattedFriends);
+           res.status(200).json(user.friends);
     }catch(err){
         //console.error(err)
         res.status(500).json({msg: err.message}
@@ -58,8 +59,9 @@ export const addRemoveFriends = async (req, res)=>{
     const user = await User.findById(id);
     const friend = await User.findById(friendId);
 
+    console.log(user.firstName)
     //check if users friendlist contains the friend
-    if(user.friends.contains(friend)){
+    if(user.friends.includes(friend)){
       user.friends =  user.friends.filter((id)=>{id != friendId});
       friend.friends =  friend.friends.filter((id)=>{id != id});
     }else{
