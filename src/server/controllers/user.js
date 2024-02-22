@@ -62,6 +62,8 @@ export const addRemoveFriends = async (req, res)=>{
     console.log(user.firstName)
     console.log(user.firstName)
     console.log("my commitment");
+    console.log("my commitment");
+
     //check if users friendlist contains the friend
     if(user.friends.includes(friend)){
       user.friends =  user.friends.filter((id)=>{id != friendId});
