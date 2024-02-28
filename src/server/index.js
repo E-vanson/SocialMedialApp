@@ -66,6 +66,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes) 
           ;
 console.log("conn " + process.env.MONGO_URL);
+console.log("I'll fix it in a minute")
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology : true,
