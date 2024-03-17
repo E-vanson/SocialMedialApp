@@ -76,5 +76,5 @@ mongoose.connect(process.env.MONGO_URL, {
 }).catch((error)=>{
     console.log(`${error} didn't work`)
 console.log("Working");
-console.log("Double working")
+console.log("Still working");
 }) 
