@@ -12,7 +12,9 @@ import { fileURLToPath } from "url"
 import helmet from "helmet"
 import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/user.js";
+import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js"
+import verifyToken from "./middleware/auth.js"
 
 
 /*CONFIGURATIONS FOR MIDDLEWARE AND OTHER PACKAGES */
@@ -54,6 +56,7 @@ const PORT = process.env.PORT || 6001;
 /* ROUTE WITH FILES */
 //middleware
 app.post("/auth/register", upload.single("picture"), register)
+app.post("/posts",verifyToken, upload.single("picture"), createPost)
 
 /* ROUTE FOR LOGIN */
 app.use("/auth", authRoutes);
@@ -61,10 +64,10 @@ app.use("/auth", authRoutes);
 /* USERS ROUTES:
             1.Users profile
             2.Users followers
-
+            3. Users posts
             */
-app.use("/users", userRoutes) 
-          ;
+app.use("/users", userRoutes);
+app.use("/posts", postRoutes)
 console.log("conn " + process.env.MONGO_URL);
 
 mongoose.connect(process.env.MONGO_URL, {
