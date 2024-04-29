@@ -66,8 +66,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes) 
           ;
 console.log("conn " + process.env.MONGO_URL);
-console.log("I'll fix it in a minute")
-console.log("I'll fix it in a minute")
+
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology : true,
@@ -75,6 +74,4 @@ mongoose.connect(process.env.MONGO_URL, {
     app.listen(PORT, ()=>{console.log(`server listening on ${PORT}`)})
 }).catch((error)=>{
     console.log(`${error} didn't work`)
-console.log("Working");
-console.log("Double working")
 }) 

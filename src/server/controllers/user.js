@@ -43,7 +43,7 @@ if (!validObjectId) {
            console.log(formattedFriends + " friends");
           
            //res.status(200).json(formattedFriends);
-           res.status(200).json(user.friends);
+           res.status(200).json(formattedFriends);
     }catch(err){
         //console.error(err)
         res.status(500).json({msg: err.message}
@@ -59,26 +59,33 @@ export const addRemoveFriends = async (req, res)=>{
     const user = await User.findById(id);
     const friend = await User.findById(friendId);
 
-    console.log(user.firstName)
-    console.log(user.firstName)
-    console.log("my commitment");
-    console.log("my commitment");
-
+    console.log(friendId)
+    console.log(user.firstName + " user")
+    console.log(friend.firstName + " friend");
+   
     //check if users friendlist contains the friend
-    if(user.friends.includes(friend)){
+    if(user.friends.includes(friendId)){
+        console.log("Both are friends so unfriend!!")
       user.friends =  user.friends.filter((id)=>{id != friendId});
       friend.friends =  friend.friends.filter((id)=>{id != id});
     }else{
         user.friends.push(friendId);
         friend.friends.push(id);
+        console.log("Now they are friends");
     }
     user.save();
     friend.save();
 
     const friends = await Promise.all(
-        user.friends.map((id)=>{User.findById(id)})
+        user.friends.map((id)=>{
+            const user = User.findById(id);
+            console.log(user + " userr")
+            return user
+        }
+        )
             );
 
+            console.log(friends + " friends");
     const formattedFriends = await friends.map(
         ({_id, firstName, lastName, occupation, location, picturePath})=>{
             return {_id, firstName, lastName, occupation, location, picturePath};
@@ -87,6 +94,7 @@ export const addRemoveFriends = async (req, res)=>{
     res.status(200).json(formattedFriends);
     }catch(err){
         res.status(404).json({msg: err.message});
+        console.log(err + " err");
     }
    
 }
