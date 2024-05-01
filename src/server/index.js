@@ -71,6 +71,7 @@ app.use("/auth", authRoutes);
             */
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes)
+app.use("/", postRoutes);
 console.log("conn " + process.env.MONGO_URL);
 
 mongoose.connect(process.env.MONGO_URL, {
