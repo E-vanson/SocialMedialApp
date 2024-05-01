@@ -7,24 +7,27 @@ export const createPost = async (req, res)=>{
         const {userId, description, picturePath} = req.body;
 
         //find user making the post
-        const user = User.findById(userId);
+        const user = await User.findById(userId);
+        console.log(userId + " userid")
+        console.log(user.firstName + " firstname");
+        console.log(user.picturePath + " picturepath");
+
         //create new post
         const newPost = new Post({
             userId,
             firstName: user.firstName,
             lastName: user.lastName,
-            location: user.location,
             description,
             picturePath,
             userPicturePath: user.picturePath,
-            like: {},
+            likes: {},
             comments: []
         })
         await newPost.save();
 
         //get all posts
-        const posts = Post.find();
-        res.status(201).json({posts})
+        const posts =  await Post.find();
+        res.status(201).json(posts)
         
     } catch (error) {
         res.status(409).json({message: error.message});

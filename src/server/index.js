@@ -31,8 +31,10 @@ app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}));
 app.use(morgan("common"));
+
 //limit: controls the maximum request body size
 app.use(bodyParser.json({limit: "30mb", extended: true}));
+
 //help store files locally
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
