@@ -13,16 +13,15 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER,
-  persistReducer
+  REGISTER
 } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const persistConfig = {key:'root', storage, version: 1};
-const persistReducer = persistReducer(persistConfig, authSlice);
+const persistedReducer = persistReducer(persistConfig, authSlice);
 const store = configureStore({
-  reducer: persistReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware)=>
              getDefaultMiddleware({
               serializableCheck: {
