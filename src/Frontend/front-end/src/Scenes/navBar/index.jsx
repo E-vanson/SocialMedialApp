@@ -39,7 +39,7 @@ const Navbar = ()=>{
     const user = useSelector((state)=> state.user);
 
     //hook in mui used to determine is current screen size of user is below the min-width or higher than min-width
-    const isNonMobileScreens = useMediaQuery("min-width: 1000px");
+    const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
     const theme = useTheme();
     const neutralLight = theme.palette.neutral.light;
@@ -49,10 +49,12 @@ const Navbar = ()=>{
     const alt = theme.palette.background.alt;
 
     //access users fullname
-    const fullName = `${user.firstName} ${user.lastName}`;
+    // const fullName = `${user.firstName} ${user.lastName}`;
+    const fullName = user ? `${user.firstName} ${user.lastName}` : 'Guest Person';
+
 
     return(
-        <FlexBtwn padding="1rem 6%" backgroundColor = {alt}>
+        <FlexBtwn padding="1rem 6%" backgroundColor={alt}>
             <FlexBtwn gap="1.75rem">
                 <Typography
                 fontWeight = "bold"
@@ -82,6 +84,7 @@ const Navbar = ()=>{
                     </FlexBtwn>  
                 )}
             </FlexBtwn>
+
             {/* DESKTOP NAV */}
             {isNonMobileScreens ?
              (
