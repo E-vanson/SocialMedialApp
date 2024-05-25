@@ -52,7 +52,7 @@ const loginInitialValues = {
 
 //Form component
 const Form = () =>{
-    const {pageType, setPageType} = useState("login");
+    const [pageType, setPageType] = useState("login");
     const {palette} = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -72,7 +72,7 @@ const Form = () =>{
             "http://localhost:6001/auth/register",
             {
                 method: "POST",
-                body: "formData"
+                body: formData
             }
         );
         const savedUser = await savedUserResponse.json();
@@ -124,7 +124,7 @@ const Form = () =>{
                 values,
                 errors,
                 touched,
-                handlebBlur,
+                handleBlur,
                 handleChange,
                 handleSubmit,
                 setFieldValue,
@@ -143,7 +143,7 @@ const Form = () =>{
                             <>
                              <TextField
                              label="First name"
-                             onBlur={handlebBlur}
+                             onBlur={handleBlur}
                              onChange={handleChange}
                              value={values.firstName}
                              name="firstName"
@@ -154,7 +154,7 @@ const Form = () =>{
 
                              <TextField
                              label="Last name"
-                             onBlur={handlebBlur}
+                             onBlur={handleBlur}
                              onChange={handleChange}
                              value={values.lastName}
                              name="lastName"
@@ -165,7 +165,7 @@ const Form = () =>{
 
                              <TextField
                              label="Location"
-                             onBlur={handlebBlur}
+                             onBlur={handleBlur}
                              onChange={handleChange}
                              value={values.location}
                              name="location"
@@ -176,7 +176,7 @@ const Form = () =>{
 
                              <TextField
                              label="Occupation"
-                             onBlur={handlebBlur}
+                             onBlur={handleBlur}
                              onChange={handleChange}
                              value={values.occupation}
                              name="occupation"
@@ -224,7 +224,7 @@ const Form = () =>{
                         {/* for both login and register */}
                         <TextField
                              label="Email"
-                             onBlur={handlebBlur}
+                             onBlur={handleBlur}
                              onChange={handleChange}
                              value={values.email}
                              name="email"
@@ -236,7 +236,7 @@ const Form = () =>{
                         <TextField
                              label="Password"
                              type = "password"
-                             onBlur={handlebBlur}
+                             onBlur={handleBlur}
                              onChange={handleChange}
                              value={values.password}
                              name="password"
@@ -255,7 +255,7 @@ const Form = () =>{
                             m: "2rem 0",
                             p: "1rem",
                             backgroundColor: palette.primary.main,
-                            color: palette.background.lastName,
+                            color: palette.background.alt,
                             "&:hover": {color: palette.primary.main}
                         }}
                         >

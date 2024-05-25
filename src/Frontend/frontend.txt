@@ -1,0 +1,25 @@
+/*INITIALISING FRONTEND APPLICATION*/
+npx create-react-app
+npm i react-redux -> state management tool
+@reduxjs/toolkit -> wrapper around redux that is easy to use
+redux-persist -> locally store state
+react-dropzone -> handle file upload and file handling and send to backend
+ dotenv -> for enviroment variables
+ formik -> for form handling
+ yup -> for validation 
+ react-router-dom@6 -> handling different routes
+ @mui/material
+ @emotion/react
+ @emotion/styled
+ @mui/icons-material
+
+ /*PLANNING THE FRONTEND ARCHITECTURE*/
+ :Scenes
+  ->homepage
+  ->loginpage
+  ->profilepage
+  ->navBar
+  ->widgets
+  
+
+

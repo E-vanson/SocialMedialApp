@@ -1,7 +1,7 @@
 import {Box,Typography,useTheme,useMediaQuery} from "@mui/material";
 import Form from "./Form"
 
-const LoginPage = ()=>{
+const LoginPage = () =>{
     const theme = useTheme();
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
@@ -36,7 +36,6 @@ const LoginPage = ()=>{
             sx={{mb: "1.5rem"}}
             >
                 Welcome to Chatty, the chat app for yappers!
-
             </Typography>
             <Form/>
         </Box>
