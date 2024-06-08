@@ -16,6 +16,7 @@ import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js"
 import verifyToken from "./middleware/auth.js"
 import { createPost } from "./controllers/posts.js"
+import { log } from "console"
 
 
 /*CONFIGURATIONS FOR MIDDLEWARE AND OTHER PACKAGES */
@@ -27,6 +28,13 @@ dotenv.config();
 
 const app = express();
 
+const corsOptions = {
+    origin: 'http://localhost:3002', // Your frontend URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}));
@@ -36,7 +44,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({limit: "30mb", extended: true}));
 
 //help store files locally
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use("/assets", express.static(path.join(__dirname, "src/server/Public/assets")));
 
 app.get("/details", (req,res)=>{
 res.status(200).send("This are the details")
@@ -44,7 +52,7 @@ res.status(200).send("This are the details")
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, "public/assets");
+        cb(null, "src/server/Public/assets");
     },
     filename: function(req, file, cb){
         cb(null, file.originalname);
@@ -58,7 +66,15 @@ const PORT = process.env.PORT || 6001;
 
 /* ROUTE WITH FILES */
 //middleware
-app.post("/auth/register", upload.single("picture"), register)
+app.post("/auth/register", upload.single("picture"), (req,res)=>{
+    try{
+        register(req,res);
+    }catch(error){
+        res.status(500).send({message: error.message})
+        console.log("err");
+    }
+})
+
 app.post("/posts",verifyToken, upload.single("picture"), createPost)
 
 /* ROUTE FOR LOGIN */
